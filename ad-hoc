@@ -1,0 +1,8 @@
+ansible all -i 192.168.128.130, -c network_cli -u admin -k -m ios_facts -e ansible_network_os=ios
+
+
+ansible-playbook -i 192.168.128.130, -c network_cli -u admin -k -e ansible_network_os=ios 01_playbook.yml
+
+
+#when you decalare hosts in hosts file 
+c network_cli -u admin -k -e ansible_network_os=ios 01_playbook.yml
