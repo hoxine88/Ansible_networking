@@ -1,0 +1,24 @@
+---
+- name: test the authentication 
+  hosts: routers
+
+  tasks:
+    - name: excute show command
+      ios_command:
+        commands:
+          - show run 
+          - show ip interface brief
+      register: show_output
+    - name: print the output
+      debug:
+          var: show_output
+
+    - name: check condition 
+      ios_command:
+        commands:
+          - show run 
+          - show ip interface brief
+        match: any
+        wait_for:
+          - result[0] contains connected to the core
+          - result[1] contains FastEthernet0/0

@@ -1,0 +1,36 @@
+---
+- name: ios configuration
+  hosts: router_pass_ssh
+
+  tasks:
+    - name: show the username
+      debug:
+        msg: "{{ansible_user}}"
+
+    - name: changing the domain name
+      ios_config:
+        lines:
+        - ip domain name hocine.com
+
+    - name: configuration of interface ip 
+      ios_config:
+        diff_against: startup
+#        save_when: modified
+        parents: interface FastEthernet1/1
+        lines:
+        - ip address 99.99.99.99 255.255.255.0 
+        - description connected to the user
+
+    - name: configuration of interface ip 
+      ios_config:
+        parents: "{{ item }}"
+        lines:
+        - description backup interface
+#        after:
+        - no shutdown
+#        save_when: modified
+
+      with_items:
+          - interface FastEthernet1/0
+          - interface GigabitEthernet2/0
+

@@ -1,0 +1,9 @@
+---
+- name: ios configuration
+  hosts: routers
+
+  tasks:
+    - name: changing the domain name
+      ios_config:
+        lines:
+        - ip domain name hocine.com

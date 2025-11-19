@@ -1,0 +1,14 @@
+---
+- name: test the authentication 
+  hosts: routers
+
+  tasks:
+    - name: show the username
+      debug:
+        msg: "{{ansible_user}}"
+
+    - name: get Facts
+      debug:
+#        msg: "the facts are {{ansible_facts}}"
+        msg: "the hostname is  {{ansible_net_hostname}}"
+#        var: ansible_facts
