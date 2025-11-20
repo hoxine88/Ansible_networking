@@ -1,25 +1,27 @@
-[router_ssh_key]
-R1 ansible_host=192.168.128.130
-
-[router_ssh_key:vars]
-ansible_user=hocine_admin
-ansible_password=
-#ansible_ssh_private_key_file=/home/hocine/.ssh/cisco
-
-[router_pass_ssh]
+[routers]
+R1 ansible_host=192.168.128.130 ansible_user=hocine_admin ansible_password=
 R2 ansible_host=192.168.128.131
 
-[router_pass_ssh:vars]
-ansible_user=admin1
-ansible_password=cisco1
-ansible_become=yes
-ansible_become_method=enable
-ansible_become_pass=cisco1
+[sw]
+S1 ansible_host=192.168.128.132
 
-[routers:children]
-router_ssh_key
-router_pass_ssh
+[sw:vars]
+ansible_connection=network_cli
+ansible_network_os=cisco.ios.ios
+ansible_user=admin
+ansible_password=cisco
+ansible_ssh_common_args='-o PubkeyAuthentication=no'
+
+[devices:children]
+routers
+sw
 
 [routers:vars]
 ansible_connection=network_cli
 ansible_network_os=cisco.ios.ios
+ansible_user=admin
+ansible_password=cisco
+ansible_ssh_common_args='-o PubkeyAuthentication=no'
+#ansible_become=yes
+#ansible_become_method=enable
+#ansible_become_pass=cisco1

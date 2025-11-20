@@ -1,0 +1,19 @@
+---
+- name: ios static route
+  hosts: routers
+
+  tasks:
+    - name: configure static route
+      cisco.ios.ios_static_route:
+        config:
+          - address_families:
+              - afi: ipv4
+                safi: unicast
+                routes:
+                  - dest: 10.1.1.0/24
+                    next_hop: 192.168.1.1
+        state: merged
+        register: route
+
+    - debug:
+        var: route.commands    

@@ -1,0 +1,109 @@
+---
+- name: ios interface
+  hosts: routers
+
+####### merged #####
+  # tasks:
+  #   - name: merge the configuration 
+  #     ios_interfaces:
+  #       config:
+  #         - name: FastEthernet1/1
+  #           description: 'this desc for ansible_facts'
+  #           duplex: full
+  #           speed: 100
+  #           enabled: true
+  #           mtu: 1525
+
+  #       state: merged
+  #     register: intf
+
+    
+  #   - debug:
+  #       var: intf.before
+
+  #   - debug:
+  #       var: intf.commands
+
+  #   - debug:
+  #       var: intf.after
+
+
+  ####### replaced #####
+  # tasks:
+  #   - name: merge the configuration 
+  #     ios_interfaces:
+  #       config:
+  #         - name: FastEthernet1/1
+  #           description: 'this desc for the replacement'
+  #           duplex: full
+  #           speed: 100
+  #           enabled: true
+  #           mtu: 1500
+
+  #       state: replaced
+  #     register: intf
+
+    
+  #   - debug:
+  #       var: intf.before
+
+  #   - debug:
+  #       var: intf.commands
+
+  #   - debug:
+  #       var: intf.after
+#####################delete#############
+  # tasks:
+  #   - name: merge the configuration 
+  #     ios_interfaces:
+  #       config:
+  #         - name: FastEthernet1/1
+  #           duplex: full
+  #           speed: 100
+  #           enabled: true
+  #           mtu: 1500
+
+  #       state: deleted
+  #     register: intf
+
+    
+  #   - debug:
+  #       var: intf.before
+
+  #   - debug:
+  #       var: intf.commands
+
+  #   - debug:
+  #       var: intf.after
+##########overridden##############
+  tasks:
+    - name: merge the configuration 
+      ios_interfaces:
+        config:
+          - name: FastEthernet0/0
+#              - FastEthernet1/1
+            # duplex: full
+            # speed: 100
+            enabled: true
+            # mtu: 1500
+
+          - name: FastEthernet1/1
+#              - FastEthernet1/1
+            duplex: full
+            speed: 100
+#            enabled: false
+            # mtu: 1500            
+
+        state: overridden
+      register: intf
+
+    
+    - debug:
+        var: intf.before
+
+    - debug:
+        var: intf.commands
+
+    - debug:
+        var: intf.after
+
