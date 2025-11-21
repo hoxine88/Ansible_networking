@@ -6,3 +6,8 @@ ansible-playbook -i 192.168.128.130, -c network_cli -u admin -k -e ansible_netwo
 
 #when you decalare hosts in hosts file 
 c network_cli -u admin -k -e ansible_network_os=ios 01_playbook.yml
+
+
+#to run this playbook to only R2 know that insiade [routers] there is R1 and R2 
+ansible-playbook 12_ios_l3_interface.yml --limit R2
+

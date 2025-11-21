@@ -1,0 +1,34 @@
+---
+- name: ios interface
+  hosts: sw
+  tasks:
+
+######### adding vlan
+
+    # - name: creation of the vlan
+    #   ios_vlans:
+    #     config:
+    #     - name: vlan_100
+    #       vlan_id: 100
+    #     state: merged
+    #   register: vlan_config
+
+    # - debug:
+    #     var: vlan_config.commands
+##########  overridden
+    - name: overridden of the vlan
+      ios_vlans:
+        config:
+        - name: vlan_100
+          vlan_id: 100
+        state: overridden
+      register: vlan_config
+
+    - debug:
+        var: vlan_config.before
+
+    - debug:
+        var: vlan_config.commands
+
+    - debug:
+        var: vlan_config.after

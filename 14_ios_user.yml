@@ -1,0 +1,41 @@
+---
+- name: ios interface
+  hosts: sw
+
+  tasks:
+######### add a user ###########
+
+    # - name: merge the configuration 
+    #   ios_user:
+    #     name: ansibe_hocine
+    #     hashed_password:
+    #       type: 5
+    #       value: $1$pass$Pt2xvPR.eREZx5wRCvKlP.
+    #     privilege: 15
+    #     state: present
+    #   register: theuser
+
+    # - debug:
+    #     var: theuser.commands
+
+##### delete the user #######
+
+    # - name: Delete users with aggregate
+    #   ios_user:
+    #     aggregate:
+    #       - name: ansibe_hocine
+    #     state: absent
+    #   register: theuser
+
+    # - debug:
+    #     var: theuser.commands
+######### remove the  user ###########
+
+    - name: merge the configuration 
+      ios_user:
+        name: ansibe_hocine
+        state: absent
+      register: theuser
+
+    - debug:
+        var: theuser.commands

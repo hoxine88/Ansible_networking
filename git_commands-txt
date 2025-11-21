@@ -1,0 +1,12 @@
+### if you make changes and you want to upload the changes/files/dir to gitbug
+git status
+git add .  (### . for all or put the name of the file)
+git commit -m " add description here"
+git push origin main ## here use password and tocken gotten from github
+
+### if you made changes in github and you wnat to pull them to local PC
+git fectch all
+git diff origin/main ## to check the the changes
+git pull 
+
+### you can also install aplication github-desktop for userfriendly GUI

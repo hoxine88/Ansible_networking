@@ -1,0 +1,34 @@
+---
+- name: ios interface
+  hosts: sw
+
+########### Access config ##############
+
+  # tasks:
+  #   - name: merge the configuration 
+  #     ios_l2_interfaces:
+  #       config:
+  #         - name: Ethernet1/1
+  #           access:
+  #             vlan: 20
+  #       state: merged  
+  #     register: vlan
+
+  #   - debug:
+  #       var: vlan.commands
+
+############# Trunk config ##################
+  tasks:
+    - name: merge the configuration 
+      ios_l2_interfaces:
+        config:
+          - name: Ethernet1/1
+            trunk:
+              allowed_vlans: 20-30
+              encapsulation: dot1q
+              native_vlan: 5
+        state: deleted  
+      register: vlan
+
+    - debug:
+        var: vlan.commands
