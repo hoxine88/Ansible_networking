@@ -1,0 +1,29 @@
+Hostname Filter:
+
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <hostname></hostname>
+    </native>
+
+
+
+Interface Filter:
+
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface></interface>
+    </native>
+
+
+Username Filter:
+
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <username></username>
+    </native>
+
+
+Configure Hostname:
+
+    <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <hostname>Router1</hostname>
+    </native>
+    </config>
