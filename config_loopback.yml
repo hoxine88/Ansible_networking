@@ -1,0 +1,35 @@
+---
+- name: Configure loopbacks safely on R1 and R2 (ios_interface)
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+
+    - name: Backup current configuration
+      cisco.ios.ios_config:
+        backup: yes
+        # backup_options:
+        #   dir_path: /home/hocine/Desktop/Ansible_networking/backup
+      register: config_backup
+
+    - name: Show backup file path
+      debug:
+        var: config_backup.backup_path
+
+    # --- R1 ---
+    - name: Configure Loopback11 on R1
+      cisco.ios.ios_interfaces:
+        name: Loopback11
+        ip_address: 10.10.10.1
+        mask: 255.255.255.255
+        state: replaced
+      when: inventory_hostname == "router1"
+
+    # --- R2 ---
+    - name: Configure Loopback0 on R2
+      cisco.ios.ios_interfaces:
+        name: Loopback0
+        ip_address: 10.10.10.2
+        mask: 255.255.255.255
+        state: replaced
+      when: inventory_hostname == "router2"

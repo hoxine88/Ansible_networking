@@ -1,0 +1,36 @@
+---
+- name: Configure loopback interfaces on R1 and R2
+  hosts: routers
+  gather_facts: no
+
+  tasks:
+
+    - name: Backup current configuration
+      cisco.ios.ios_config:
+        backup: yes
+        # backup_options:
+        #   dir_path: /home/hocine/Desktop/backup_config/
+
+      register: config_backup
+
+    - name: Show backup file path
+      debug:
+        var: config_backup.backup_path
+
+    - name: Configure Loopback0 on R1
+      cisco.ios.ios_config:
+        parents:
+          - interface Loopback11
+        
+        lines:
+          - ip address 10.10.10.15 255.255.255.255
+      when: inventory_hostname == "router1"
+
+    - name: Configure Loopback0 on R2
+      cisco.ios.ios_config:
+        parents:
+          - interface Loopback0
+        lines:
+          - ip address 10.10.10.25 255.255.255.255
+      when: inventory_hostname == "router2"
+

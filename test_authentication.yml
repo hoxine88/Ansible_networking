@@ -1,6 +1,6 @@
 ---
 - name: test the authentication 
-  hosts: devices
+  hosts: routers
 
   tasks:
     - name: show the username

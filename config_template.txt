@@ -1,0 +1,18 @@
+
+!
+ip domain-name hocine.com
+!
+username admin privilege 15 secret cisco
+!
+crypto key generate rsa modulus 1024
+!
+ip ssh version 2
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+enable secret cisco
+!
+service password-encryption
+!

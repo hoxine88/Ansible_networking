@@ -1,20 +1,21 @@
 Building configuration...
 
-Current configuration : 1317 bytes
+Current configuration : 1540 bytes
 !
-! Last configuration change at 14:50:49 UTC Tue Nov 18 2025 by admin
+! Last configuration change at 13:14:57 UTC Sat Nov 22 2025 by admin
 upgrade fpd auto
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
-no service password-encryption
+service password-encryption
 !
-hostname R2
+hostname router1
 !
 boot-start-marker
 boot-end-marker
 !
 !
+enable secret 5 $1$V2dA$oFLQJwF1n/K4RFAL3XLRI/
 !
 no aaa new-model
 no ip icmp rate-limit unreachable
@@ -25,7 +26,7 @@ no ip icmp rate-limit unreachable
 !
 !
 no ip domain lookup
-ip domain name hocine
+ip domain name hocine.com
 ip cef
 no ipv6 cef
 !
@@ -39,7 +40,7 @@ multilink bundle-name authenticated
 !
 !
 !
-username admin privilege 15 password 0 cisco
+username admin privilege 15 secret 5 $1$PBjb$oglFA3iFQNuUsZ5elNs6l.
 !
 redundancy
 !
@@ -56,8 +57,17 @@ ip ssh version 2
 !
 !
 !
+interface Loopback0
+ ip address 10.10.10.1 255.255.255.255
+!
+interface Loopback10
+ ip address 10.10.10.100 255.255.255.255
+!
+interface Loopback11
+ ip address 10.10.10.11 255.255.255.255
+!
 interface FastEthernet0/0
- ip address 192.168.128.131 255.255.255.0
+ ip address 192.168.128.140 255.255.255.0
  duplex half
 !
 interface FastEthernet1/0
@@ -109,12 +119,9 @@ line aux 0
  privilege level 15
  logging synchronous
  stopbits 1
-line vty 0 1
+line vty 0 4
  login local
  transport input ssh
-line vty 2 4
- login
- transport input all
 !
 !
 end
